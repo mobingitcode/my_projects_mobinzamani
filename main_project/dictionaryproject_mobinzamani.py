@@ -27,7 +27,6 @@ def search_word () :
     
     # مدیریت خطای وصل نبودن به اینترنت
     try : 
-        # ---------- ای پی آی اول برای گرفتن مواردی از قبیل آوا، مثال و ... ----------
         # دریافت اطلاعات از دیکشنری
         dict_url =  f"https://api.dictionaryapi.dev/api/v2/entries/en/{word}"
         dict_response = requests.get(dict_url)
@@ -61,7 +60,6 @@ def search_word () :
         # دریافت جمله نمونه
         example = first_def.get("example", "not found")
 
-        # ---------- ای پی آی دوم: مترادف و متضاد ----------
         # لیست خالی برای مترادف‌ها
         synonyms = []
         # لیست خالی برای متضادها
@@ -90,7 +88,6 @@ def search_word () :
         except : 
             pass 
 
-        # ---------- ای پی آی سوم: ترجمه فارسی ----------
         # مقدار پیش‌فرض برای ترجمه کلمه
         persian = "not found" 
         # مقدار پیش‌فرض برای ترجمه مثال
@@ -129,7 +126,6 @@ def search_word () :
         except : 
             pass
 
-        # ---------- ساخت خروجی ----------
         # شروع ساخت رشته خروجی
         output = f"{word_name}:کلمه\n\n"
         # اضافه کردن ترجمه فارسی
@@ -176,7 +172,6 @@ def search_word () :
         status_label.config(text="Search Error", foreground="red")
 
 
-# ---------- ساخت پنجره اصلی ----------
 # ایجاد پنجره اصلی
 root = tk.Tk()
 # تنظیم عنوان پنجره
@@ -193,7 +188,6 @@ style.configure("TButton" , padding = 6 , font = ('Tahoma' , 10))
 # تنظیم استایل برچسب‌ها (فونت)
 style.configure("TLabel" , font = ('Tahoma' , 10))
 
-# ---------- قاب بالایی (ورودی) ----------
 # ایجاد قاب برای بخش ورودی
 frame_top = ttk.Frame(root , padding= 10)
 # قرار دادن قاب در پنجره (با عرض کامل)
@@ -220,7 +214,6 @@ btn_search = ttk.Button(frame_top , text = "search \U0001F50D" , command = searc
 # قرار دادن دکمه با فاصله عمودی
 btn_search.pack(pady = 5)
 
-# ---------- قاب پایینی (نمایش نتیجه) ----------
 # ایجاد قاب برای نمایش نتیجه
 frame_result = ttk.Frame(root , padding = 10)
 # قرار دادن قاب در پنجره (با گسترش در هر دو جهت)
@@ -239,7 +232,6 @@ result_text.tag_configure("rtl", justify='right')
 # قرار دادن جعبه متن در قاب (با گسترش)
 result_text.pack(fill=tk.BOTH , expand = True )
 
-# ---------- نوار وضعیت ----------
 # ایجاد نوار وضعیت در پایین پنجره
 # relief میاد و یک حالت تو رفتگی میده
 status_label = ttk.Label(root , text = "ready" , relief=tk.SUNKEN , anchor = tk.W)
@@ -249,7 +241,7 @@ status_label.pack(side = tk.BOTTOM , fill = tk .X , padx = 5 , pady = 5)
 # اجرای حلقه اصلی برنامه
 root.mainloop()
 
-# ========== مثال ساختار JSON دریافتی از API اول (دیکشنری) برای کلمه "book" ==========
+# مثال ساختار JSON دریافتی از API اول (دیکشنری) برای کلمه "book" 
 # {
 #     "word": "book",
 #     "phonetic": "/bʊk/",
@@ -266,7 +258,7 @@ root.mainloop()
 #     ]
 # }
 
-# ========== مثال ساختار JSON دریافتی از API دوم (مترادف‌ها) برای کلمه "happy" ==========
+#  مثال ساختار JSON دریافتی از API دوم (مترادف‌ها) برای کلمه "happy"
 # [
 #     {"word": "glad", "score": 100},
 #     {"word": "joyful", "score": 90},
@@ -275,7 +267,7 @@ root.mainloop()
 #     {"word": "pleased", "score": 60}
 # ]
 
-# ========== مثال ساختار JSON دریافتی از API سوم (ترجمه) برای کلمه "book" ==========
+# مثال ساختار JSON دریافتی از API سوم (ترجمه) برای کلمه "book"
 # {
 #     "responseData": {
 #         "translatedText": "کتاب"
